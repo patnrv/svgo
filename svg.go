@@ -244,8 +244,8 @@ func (svg *SVG) Polygon(x []int, y []int, s ...string) {
 }
 
 // Rect draws a rectangle with upper left-hand corner at x,y, with width w, and height h, with optional style
-// Standard Reference: http://www.w3.org/TR/SVG11/shapes.html#RectElement
-func (svg *SVG) Rect(x int, y int, w int, h int, s ...string) {
+// Standard Reference: http://www.w3.org/TR/SVG11/shapes.html#PolygonElement
+func (svg *SVG) Rect(x float32, y float32, w float32, h float32, s ...string) {
 	svg.printf(`<rect %s %s`, dim(x, y, w, h, svg.Unit), endstyle(s, emptyclose))
 }
 
@@ -877,6 +877,11 @@ func href(s string) string { return fmt.Sprintf(`xlink:href="%s"`, s) }
 // dim returns the dimension string (x, y coordinates and width, height)
 func dim(x int, y int, w int, h int, u string) string {
 	return fmt.Sprintf(`x="%d%s" y="%d%s" width="%d%s" height="%d%s"`, x, u, y, u, w, u, h, u)
+}
+
+// dim returns the dimension string (x, y coordinates and width, height)
+func dimf(x float32, y float32, w float32, h float32, u string) string {
+	return fmt.Sprintf(`x="%f%s" y="%f%s" width="%f%s" height="%f%s"`, x, u, y, u, w, u, h, u)
 }
 
 // fsattr returns the XML attribute representation of a filterspec, ignoring empty attributes
